@@ -55,11 +55,18 @@ impl MavProfile {
     /// update this enum with information about whether it is a bitmask, and what
     /// is the desired width of such.
     fn update_enums(mut self) -> Self {
-        for msg in self.messages.values() {
-            for field in &msg.fields {
+        for msg in self.messages.values_mut() {
+            for field in &mut msg.fields {
                 if let Some(enum_name) = &field.enumtype {
                     // it is a bitmask
-                    if let Some("bitmask") = &field.display.as_deref() {
+                    if Some("bitmask") == field.display.as_deref()
+                        || self
+                            .enums
+                            .get(enum_name)
+                            .map(|used_enum| used_enum.is_bitmask)
+                            .unwrap_or_default()
+                    {
+                        field.display = Some("bitmask".to_string());
                         // find the corresponding enum
                         for enm in self.enums.values_mut() {
                             if enm.name == *enum_name {
@@ -286,8 +293,9 @@ pub struct MavEnum {
     pub name: String,
     pub description: Option<String>,
     pub entries: Vec<MavEnumEntry>,
-    /// If contains Some, the string represents the type witdh for bitflags
+    /// If contains Some, the string represents the type width for bitflags
     pub bitfield: Option<String>,
+    pub is_bitmask: bool,
 }
 
 impl MavEnum {
@@ -1131,6 +1139,11 @@ pub fn parse_profile(
                                     })
                                     .collect();
                                 //mavenum.name = attr.value.clone();
+                            }
+                            if attr.key.into_inner() == b"bitmask" {
+                                if attr.value.to_ascii_lowercase() == b"true" {
+                                    mavenum.is_bitmask = true;
+                                }
                             }
                         }
                         Some(&MavXmlElement::Entry) => {
