@@ -3,7 +3,7 @@
 ## Avalor Fork Modifications
 This branch splits from rust-mavlink, continuing from version 0.12.2. It fixes fields that should be bitmasks being recognized as enums. This leads to messages with bitmasks that have multiple bits set being discarded wrongfully.
 
-This is fixed in their 0.13+ version but that one has other issues in the form of dissapearing extension fields that we need. Since this was an easy and quick fix we currently use this fork.
+This is fixed (?) in their 0.13+ version but that one has other issues in the form of dissapearing extension fields that we need. Since this was an easy and quick fix we currently use this fork.
 
 If 0.13 gets updated to once again give access to the extension fields we need, and also support the newest version of the mavlink standard (currently the parser has a bug with ILLUMINATOR_MODE being used as both an enum and bitmask) we should remove this fork and use the main repo again.
 
