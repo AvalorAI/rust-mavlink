@@ -1037,6 +1037,20 @@ fn is_valid_parent(p: Option<MavXmlElement>, s: MavXmlElement) -> bool {
     }
 }
 
+/// Inject custom MAV_MODE entry that is not in standard XML
+fn inject_custom_mav_mode(profile: &mut MavProfile) {
+    // Find the MAV_MODE enum
+    if let Some(mav_mode) = profile.enums.get_mut("MAV_MODE") {
+        // Add our custom entry
+        mav_mode.entries.push(MavEnumEntry {
+            value: Some(81),
+            name: "MAV_MODE_CUSTOM".to_string(),
+            description: Some("Custom mode for special operations".to_string()),
+            params: None,
+        });
+    }
+}
+
 pub fn parse_profile(
     definitions_dir: &Path,
     definition_file: &String,
@@ -1367,7 +1381,12 @@ pub fn parse_profile(
     }
 
     //let profile = profile.update_messages(); //TODO verify no longer needed
-    profile.update_enums()
+    let mut profile = profile.update_enums();
+
+    // Inject our custom MAV_MODE
+    inject_custom_mav_mode(&mut profile);
+
+    profile
 }
 
 /// Generate protobuf represenation of mavlink message set
