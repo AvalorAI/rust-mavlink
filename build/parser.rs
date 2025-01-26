@@ -1039,9 +1039,16 @@ fn is_valid_parent(p: Option<MavXmlElement>, s: MavXmlElement) -> bool {
 
 /// Inject custom MAV_MODE entry that is not in standard XML
 fn inject_custom_mav_mode(profile: &mut MavProfile) {
-    // Find the MAV_MODE enum
-    if let Some(mav_mode) = profile.enums.get_mut("MAV_MODE") {
+    if let Some(mav_mode) = profile.enums.get_mut("MavMode") {
         // Add our custom entry
+        // check if the entry already exists
+        if mav_mode
+            .entries
+            .iter()
+            .any(|entry| entry.name == "MAV_MODE_CUSTOM")
+        {
+            return;
+        }
         mav_mode.entries.push(MavEnumEntry {
             value: Some(81),
             name: "MAV_MODE_CUSTOM".to_string(),

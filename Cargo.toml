@@ -2,7 +2,14 @@
 [package]
 name = "mavlink"
 version = "0.12.3"
-authors = ["Todd Stellanova", "Michal Podhradsky", "Kevin Mehall", "Tim Ryan", "Patrick José Pereira", "Ibiyemi Abiodun"]
+authors = [
+    "Todd Stellanova",
+    "Michal Podhradsky",
+    "Kevin Mehall",
+    "Tim Ryan",
+    "Patrick José Pereira",
+    "Ibiyemi Abiodun",
+]
 build = "build/main.rs"
 description = "Implements the MAVLink data interchange format for UAVs."
 readme = "README.md"
@@ -21,7 +28,7 @@ serde = { version = "1.0.115", optional = true, features = ["derive"] }
 
 [[bin]]
 name = "mavlink-dump"
-required-features = ["ardupilotmega"]
+required-features = ["ardupilotmega", "format-generated-code"]
 
 [dependencies]
 crc-any = { version = "2.3.5", default-features = false }
@@ -96,9 +103,23 @@ serde_arrays = { version = "0.1.0", optional = true }
 "direct-serial" = []
 "embedded" = ["embedded-hal", "nb"]
 "serde" = ["dep:serde", "dep:serde_arrays"]
-default = ["std", "tcp", "udp", "direct-serial", "serial", "serde", "ardupilotmega"]
+default = [
+    "std",
+    "tcp",
+    "udp",
+    "direct-serial",
+    "serial",
+    "serde",
+    "ardupilotmega",
+]
 
 # build with all features on docs.rs so that users viewing documentation
 # can see everything
 [package.metadata.docs.rs]
-features = ["default", "all-dialects", "emit-description", "emit-extensions", "format-generated-code"]
+features = [
+    "default",
+    "all-dialects",
+    "emit-description",
+    "emit-extensions",
+    "format-generated-code",
+]
