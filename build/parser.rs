@@ -1058,6 +1058,27 @@ fn inject_custom_mav_mode(profile: &mut MavProfile) {
     }
 }
 
+/// Inject custom MAV_MODE entry that is not in standard XML
+fn inject_custom_mav_cmd(profile: &mut MavProfile) {
+    if let Some(mav_mode) = profile.enums.get_mut("MavCmd") {
+        // Add our custom entry
+        // check if the entry already exists
+        if mav_mode
+            .entries
+            .iter()
+            .any(|entry| entry.name == "MAV_CMD_DO_FLAP_CHECK_AUTERION")
+        {
+            return;
+        }
+        mav_mode.entries.push(MavEnumEntry {
+            value: Some(247),
+            name: "MAV_MODE_CUSTOM".to_string(),
+            description: Some("Custom mode for special operations".to_string()),
+            params: None,
+        });
+    }
+}
+
 pub fn parse_profile(
     definitions_dir: &Path,
     definition_file: &String,
@@ -1392,6 +1413,9 @@ pub fn parse_profile(
 
     // Inject our custom MAV_MODE
     inject_custom_mav_mode(&mut profile);
+
+    // Inject our custom mav commands
+    inject_custom_mav_cmd(&mut profile);
 
     profile
 }
