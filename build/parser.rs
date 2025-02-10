@@ -14,6 +14,25 @@ use quick_xml::{events::Event, Reader};
 use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
 
+fn inject_custom_mav_cmd(profile: &mut MavProfile) {
+    if let Some(mav_cmd) = profile.enums.get_mut("MavCmd") {
+        if mav_cmd
+            .entries
+            .iter()
+            .any(|entry| entry.name == "AVALOR_CUSTOM_AUTERION_FLAP_CHECK")
+        {
+            return;
+        }
+
+        mav_cmd.entries.push(MavEnumEntry {
+            value: Some(247),
+            name: "AVALOR_CUSTOM_AUTERION_FLAP_CHECK".to_string(),
+            description: Some("Custom mode for special operations".to_string()),
+            params: None,
+        });
+    }
+}
+
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
@@ -1363,6 +1382,10 @@ pub fn parse_profile(
                 break;
             }
             _ => {}
+        }
+
+        if definition_file.contains("common") {
+            inject_custom_mav_cmd(&mut profile);
         }
     }
 
