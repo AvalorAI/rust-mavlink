@@ -19,14 +19,14 @@ fn inject_custom_mav_cmd(profile: &mut MavProfile) {
         if mav_cmd
             .entries
             .iter()
-            .any(|entry| entry.name == "AVALOR_CUSTOM_AUTERION_EVO_CHECK")
+            .any(|entry| entry.name == "AVALOR_CUSTOM_AUTERION_FLAP_CHECK")
         {
             return;
         }
 
         mav_cmd.entries.push(MavEnumEntry {
             value: Some(247),
-            name: "AVALOR_CUSTOM_AUTERION_EVO_CHECK".to_string(),
+            name: "AVALOR_CUSTOM_AUTERION_FLAP_CHECK".to_string(),
             description: Some("Custom mode for special operations".to_string()),
             params: None,
         });
