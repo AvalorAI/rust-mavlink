@@ -32,7 +32,7 @@ fn inject_custom_mav_cmds(profile: &mut MavProfile) {
         });
 
         mav_cmd.entries.push(MavEnumEntry {
-            value: Some(420),
+            value: Some(43003),
             name: "MAV_CMD_EXTERNAL_POSITION_ESTIMATE".to_string(),
             description: Some("Send corrections for the global position estimate".to_string()),
             params: Some(vec![
