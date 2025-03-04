@@ -8,7 +8,11 @@ This is fixed (?) in their 0.13+ version but that one has other issues in the fo
 
 If 0.13 gets updated to once again give access to the extension fields we need, and also support the newest version of the mavlink standard (currently the parser has a bug with ILLUMINATOR_MODE being used as both an enum and bitmask) we should remove this fork and use the main repo again.
 
-An additional MavCmd namely: `AVALOR_CUSTOM_AUTERION_FLAP_CHECK` is added to support flap checks on vehicles which have a version lower than 3.0.0
+Two additional MavCmds namely:
+
+- `AVALOR_CUSTOM_AUTERION_FLAP_CHECK` is added to support flap checks on vehicles which have a version lower than 3.0.0
+
+- `MAV_CMD_EXTERNAL_POSITION_ESTIMATE` is added to be able to correct the vehicle position when GPS is not available.
 
 ## Info
 

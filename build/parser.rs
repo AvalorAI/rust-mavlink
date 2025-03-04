@@ -14,7 +14,7 @@ use quick_xml::{events::Event, Reader};
 use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
 
-fn inject_custom_mav_cmd(profile: &mut MavProfile) {
+fn inject_custom_mav_cmds(profile: &mut MavProfile) {
     if let Some(mav_cmd) = profile.enums.get_mut("MavCmd") {
         if mav_cmd
             .entries
@@ -30,6 +30,21 @@ fn inject_custom_mav_cmd(profile: &mut MavProfile) {
             description: Some("Custom mode for special operations".to_string()),
             params: None,
         });
+
+        mav_cmd.entries.push(MavEnumEntry {
+            value: Some(420),
+            name: "MAV_CMD_EXTERNAL_POSITION_ESTIMATE".to_string(),
+            description: Some("Send corrections for the global position estimate".to_string()),
+            params: Some(vec![
+                "transmission_time".to_string(),
+                "processing_time".to_string(),
+                "accuracy".to_string(),
+                "empty".to_string(),
+                "latitude".to_string(),
+                "longitude".to_string(),
+                "altitude".to_string(),
+            ]),
+        })
     }
 }
 
@@ -1385,7 +1400,7 @@ pub fn parse_profile(
         }
 
         if definition_file.contains("common") {
-            inject_custom_mav_cmd(&mut profile);
+            inject_custom_mav_cmds(&mut profile);
         }
     }
 
