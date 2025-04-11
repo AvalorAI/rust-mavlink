@@ -1369,20 +1369,39 @@ pub fn parse_profile(
 
 fn inject_custom_mav_cmd(profile: &mut MavProfile) {
     if let Some(mav_cmd) = profile.enums.get_mut("MavCmd") {
-        if mav_cmd
+        if !mav_cmd
             .entries
             .iter()
             .any(|entry| entry.name == "AVALOR_CUSTOM_AUTERION_FLAP_CHECK")
         {
-            return;
+            mav_cmd.entries.push(MavEnumEntry {
+                value: Some(247),
+                name: "AVALOR_CUSTOM_AUTERION_FLAP_CHECK".to_string(),
+                description: Some("Custom message for flap checks on auterion devices".to_string()),
+                params: None,
+            });
         }
 
-        mav_cmd.entries.push(MavEnumEntry {
-            value: Some(247),
-            name: "AVALOR_CUSTOM_AUTERION_FLAP_CHECK".to_string(),
-            description: Some("Custom message for flap checks on auterion devices".to_string()),
-            params: None,
-        });
+        if !mav_cmd
+            .entries
+            .iter()
+            .any(|entry| entry.name == "MAV_CMD_EXTERNAL_POSITION_ESTIMATE")
+        {
+            mav_cmd.entries.push(MavEnumEntry {
+            value: Some(43003),
+            name: "MAV_CMD_EXTERNAL_POSITION_ESTIMATE".to_string(),
+            description: Some("Provide an external position estimate for use when dead-reckoning. This is meant to be used for occasional position resets that may be provided by a external system such as a remote pilot using landmarks over a video link.".to_string()),
+            params: Some(vec![
+                "transmission_time".to_string(),
+                "processing_time".to_string(),
+                "accuracy".to_string(),
+                "param4".to_string(),
+                "latitude".to_string(),
+                "longitude".to_string(),
+                "altitude".to_string(),
+            ]),
+        })
+        }
     }
 }
 
