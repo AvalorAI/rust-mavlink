@@ -1374,7 +1374,7 @@ fn inject_custom_mav_mode(profile: &mut MavProfile) {
         // Add our custom entry
         mav_mode.entries.push(MavEnumEntry {
             value: Some(23),
-            name: "AUTERION_MC_FOLLOW".to_string(),
+            name: "MAV_MODE_AUTERION_MC_FOLLOW".to_string(),
             description: Some("Custom mode for special operations".to_string()),
             params: None,
         });
