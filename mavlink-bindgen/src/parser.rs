@@ -1370,7 +1370,7 @@ pub fn parse_profile(
 
 fn inject_custom_mav_mode(profile: &mut MavProfile) {
     // Find the MAV_MODE enum
-    if let Some(mav_mode) = profile.enums.get_mut("MAV_MODE") {
+    if let Some(mav_mode) = profile.enums.get_mut("MavMode") {
         // Add our custom entry
         mav_mode.entries.push(MavEnumEntry {
             value: Some(23),
