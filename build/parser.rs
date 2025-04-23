@@ -14,6 +14,25 @@ use quick_xml::{events::Event, Reader};
 use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
 
+fn inject_custom_mav_mode(profile: &mut MavProfile) {
+    // Find the MAV_MODE enum
+    if let Some(mav_mode) = profile.enums.get_mut("MAV_MODE") {
+        if mav_mode
+            .entries
+            .iter()
+            .any(|entry| entry.name == "MAV_MODE_AUTERION_MC_FOLLOW")
+        {
+            return;
+        }
+        // Add our custom entry
+        mav_mode.entries.push(MavEnumEntry {
+            value: Some(23),
+            name: "MAV_MODE_AUTERION_MC_FOLLOW".to_string(),
+            description: Some("Custom mode for special operations".to_string()),
+            params: None,
+        });
+    }
+}
 fn inject_custom_mav_cmd(profile: &mut MavProfile) {
     if let Some(mav_cmd) = profile.enums.get_mut("MavCmd") {
         if mav_cmd
@@ -1386,6 +1405,7 @@ pub fn parse_profile(
 
         if definition_file.contains("common") {
             inject_custom_mav_cmd(&mut profile);
+            inject_custom_mav_mode(&mut profile)
         }
     }
 
