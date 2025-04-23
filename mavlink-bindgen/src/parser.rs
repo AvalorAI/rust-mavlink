@@ -1361,10 +1361,24 @@ pub fn parse_profile(
 
     if definition_file.to_str().unwrap().contains("common") {
         inject_custom_mav_cmd(&mut profile);
+        inject_custom_mav_mode(&mut profile);
     }
 
     //let profile = profile.update_messages(); //TODO verify no longer needed
     Ok(profile.update_enums())
+}
+
+fn inject_custom_mav_mode(profile: &mut MavProfile) {
+    // Find the MAV_MODE enum
+    if let Some(mav_mode) = profile.enums.get_mut("MAV_MODE") {
+        // Add our custom entry
+        mav_mode.entries.push(MavEnumEntry {
+            value: Some(81),
+            name: "MAV_MODE_CUSTOM".to_string(),
+            description: Some("Custom mode for special operations".to_string()),
+            params: None,
+        });
+    }
 }
 
 fn inject_custom_mav_cmd(profile: &mut MavProfile) {
