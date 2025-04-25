@@ -1373,8 +1373,8 @@ fn inject_custom_mav_mode(profile: &mut MavProfile) {
     if let Some(mav_mode) = profile.enums.get_mut("MavMode") {
         // Add our custom entry
         mav_mode.entries.push(MavEnumEntry {
-            value: Some(29),
-            name: "MAV_MODE_AUTERION_MC_FOLLOW".to_string(),
+            value: Some(81),
+            name: "MAV_MODE_AUTERION_STRIKE".to_string(),
             description: Some("Custom mode for special operations".to_string()),
             params: None,
         });
