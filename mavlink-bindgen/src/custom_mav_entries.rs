@@ -4,7 +4,7 @@ pub fn get_custom_entries() -> Vec<MavEnumEntry> {
     vec![
         MavEnumEntry {
             value: Some(218),
-            name: "GURZUF_ARM_DISARM".to_string(),
+            name: "ARDU_AUX_FUN".to_string(),
             description: Some("Gurzuf arm/disarm command".to_string()),
             params: Some(vec![
                 "action_type".to_string(),
@@ -13,7 +13,7 @@ pub fn get_custom_entries() -> Vec<MavEnumEntry> {
         },
         MavEnumEntry {
             value: Some(31100),
-            name: "GURZUF_STARLINK".to_string(),
+            name: "STARLINK".to_string(),
             description: Some("Send position to starlink".to_string()),
             params: Some(vec!["lat".to_string(), "long".to_string()]),
         },
