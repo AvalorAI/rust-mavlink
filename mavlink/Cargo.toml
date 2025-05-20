@@ -3,12 +3,12 @@
 name = "mavlink"
 version = "0.13.2"
 authors = [
-    "Todd Stellanova",
-    "Michal Podhradsky",
-    "Kevin Mehall",
-    "Tim Ryan",
-    "Patrick José Pereira",
-    "Ibiyemi Abiodun",
+  "Todd Stellanova",
+  "Michal Podhradsky",
+  "Kevin Mehall",
+  "Tim Ryan",
+  "Patrick José Pereira",
+  "Ibiyemi Abiodun",
 ]
 build = "build/main.rs"
 description = "Implements the MAVLink data interchange format for UAVs."
@@ -36,19 +36,19 @@ serde_arrays = { version = "0.1.0", optional = true }
 
 [features]
 "all" = [
-    "ardupilotmega",
-    "asluav",
-    "common",
-    "development",
-    "icarous",
-    "minimal",
-    "python_array_test",
-    "standard",
-    "test",
-    "ualberta",
-    "uavionix",
-    "avssuas",
-    "cubepilot",
+  "ardupilotmega",
+  "asluav",
+  "common",
+  "development",
+  "icarous",
+  "minimal",
+  "python_array_test",
+  "standard",
+  "test",
+  "ualberta",
+  "uavionix",
+  "avssuas",
+  "cubepilot",
 ]
 "ardupilotmega" = ["common", "icarous", "uavionix"]
 "asluav" = ["common"]
@@ -68,22 +68,22 @@ serde_arrays = { version = "0.1.0", optional = true }
 "cubepilot" = ["common"]
 
 "all-dialects" = [
-    "ardupilotmega",
-    "asluav",
-    "avssuas",
-    "development",
-    "matrixpilot",
-    "minimal",
-    "paparazzi",
-    "python_array_test",
-    "slugs",
-    "standard",
-    "test",
-    "ualberta",
-    "uavionix",
-    "icarous",
-    "common",
-    "cubepilot",
+  "ardupilotmega",
+  "asluav",
+  "avssuas",
+  "development",
+  "matrixpilot",
+  "minimal",
+  "paparazzi",
+  "python_array_test",
+  "slugs",
+  "standard",
+  "test",
+  "ualberta",
+  "uavionix",
+  "icarous",
+  "common",
+  "cubepilot",
 ]
 
 "format-generated-code" = []
@@ -101,20 +101,24 @@ serde_arrays = { version = "0.1.0", optional = true }
 "embedded-hal-02" = ["mavlink-core/embedded-hal-02"]
 "serde" = ["mavlink-core/serde", "dep:serde", "dep:serde_arrays"]
 "tokio-1" = ["mavlink-core/tokio-1"]
-default = ["std", "tcp", "udp", "direct-serial", "serde", "ardupilotmega"]
+default = ["std", "tcp", "udp", "direct-serial", "serde", "common"]
 
 # build with all features on docs.rs so that users viewing documentation
 # can see everything
 [package.metadata.docs.rs]
 features = [
-    "default",
-    "all-dialects",
-    "emit-description",
-    "emit-extensions",
-    "format-generated-code",
-    "tokio-1",
-    "signing"
+  "default",
+  "all-dialects",
+  "emit-description",
+  "emit-extensions",
+  "format-generated-code",
+  "tokio-1",
+  "signing",
 ]
 
 [dev-dependencies]
-tokio = { version = "1.0", default-features = false, features = ["macros", "rt", "time" ] }
+tokio = { version = "1.0", default-features = false, features = [
+  "macros",
+  "rt",
+  "time",
+] }
