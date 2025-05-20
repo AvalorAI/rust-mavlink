@@ -3,6 +3,21 @@ use crate::parser::MavEnumEntry;
 pub fn get_custom_entries() -> Vec<MavEnumEntry> {
     vec![
         MavEnumEntry {
+            value: Some(218),
+            name: "GURZUF_ARM_DISARM".to_string(),
+            description: Some("Gurzuf arm/disarm command".to_string()),
+            params: Some(vec![
+                "action_type".to_string(),
+                "enable/disable".to_string(),
+            ]),
+        },
+        MavEnumEntry {
+            value: Some(31100),
+            name: "GURZUF_STARLINK".to_string(),
+            description: Some("Send posistoin to starlink".to_string()),
+            params: Some(vec!["lat".to_string(), "long".to_string()]),
+        },
+        MavEnumEntry {
             value: Some(247),
             name: "CUSTOM_AUTERION_FLAP_CHECK".to_string(),
             description: Some("Custom message for flap checks on auterion devices".to_string()),
