@@ -1368,33 +1368,41 @@ pub fn parse_profile(
     Ok(profile.update_enums())
 }
 
-fn inject_custom_mav_mode(profile: &mut MavProfile) {
-    // Find the MAV_MODE enum
-    if let Some(mav_mode) = profile.enums.get_mut("MavMode") {
-        // Add our custom entry
-        mav_mode.entries.push(MavEnumEntry {
-            value: Some(81),
-            name: "MAV_MODE_AUTERION_STRIKE".to_string(),
-            description: Some("Custom mode for special operations".to_string()),
-            params: None,
-        });
-    }
-}
-
 fn inject_custom_mav_cmd(profile: &mut MavProfile) {
     if let Some(mav_cmd) = profile.enums.get_mut("MavCmd") {
         if mav_cmd
             .entries
             .iter()
-            .any(|entry| entry.name == "AVALOR_CUSTOM_AUTERION_FLAP_CHECK")
+            .any(|entry| entry.name == "AVALOR_CUSTOM_EVO_FLAP_CHECK")
         {
             return;
         }
 
         mav_cmd.entries.push(MavEnumEntry {
             value: Some(247),
-            name: "AVALOR_CUSTOM_AUTERION_FLAP_CHECK".to_string(),
-            description: Some("Custom message for flap checks on auterion devices".to_string()),
+            name: "AVALOR_CUSTOM_EVO_FLAP_CHECK".to_string(),
+            description: Some("Custom message for flap checks on Evo devices".to_string()),
+            params: None,
+        });
+    }
+}
+
+fn inject_custom_mav_mode(profile: &mut MavProfile) {
+    // Find the MAV_MODE enum
+    if let Some(mav_mode) = profile.enums.get_mut("MavMode") {
+        if mav_mode
+            .entries
+            .iter()
+            .any(|entry| entry.name == "CUSTOM_DRAGON_STRIKE")
+        {
+            return;
+        }
+
+        // Add our custom entry
+        mav_mode.entries.push(MavEnumEntry {
+            value: Some(81),
+            name: "CUSTOM_DRAGON_STRIKE".to_string(),
+            description: Some("Custom mode for special operations".to_string()),
             params: None,
         });
     }
