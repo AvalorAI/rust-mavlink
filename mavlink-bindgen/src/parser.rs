@@ -1373,14 +1373,14 @@ fn inject_custom_mav_cmd(profile: &mut MavProfile) {
         if mav_cmd
             .entries
             .iter()
-            .any(|entry| entry.name == "AVALOR_CUSTOM_EVO_FLAP_CHECK")
+            .any(|entry| entry.name == "CUSTOM_EVO_FLAP_CHECK")
         {
             return;
         }
 
         mav_cmd.entries.push(MavEnumEntry {
             value: Some(247),
-            name: "AVALOR_CUSTOM_EVO_FLAP_CHECK".to_string(),
+            name: "CUSTOM_EVO_FLAP_CHECK".to_string(),
             description: Some("Custom message for flap checks on Evo devices".to_string()),
             params: None,
         });
@@ -1393,7 +1393,7 @@ fn inject_custom_mav_mode(profile: &mut MavProfile) {
         if mav_mode
             .entries
             .iter()
-            .any(|entry| entry.name == "CUSTOM_DRAGON_STRIKE")
+            .any(|entry| entry.name == "CUSTOM_DRAGON_LMT")
         {
             return;
         }
@@ -1401,7 +1401,7 @@ fn inject_custom_mav_mode(profile: &mut MavProfile) {
         // Add our custom entry
         mav_mode.entries.push(MavEnumEntry {
             value: Some(81),
-            name: "CUSTOM_DRAGON_STRIKE".to_string(),
+            name: "CUSTOM_DRAGON_LMT".to_string(),
             description: Some("Custom mode for special operations".to_string()),
             params: None,
         });
