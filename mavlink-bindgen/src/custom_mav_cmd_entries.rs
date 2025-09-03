@@ -34,20 +34,6 @@ pub fn get_custom_entries() -> Vec<MavEnumEntry> {
             ]),
         },
         MavEnumEntry {
-            value: Some(31005),
-            name: "CUSTOM_PATRON_SPATIAL_USER_1".to_string(),
-            description: Some("Object Detection Item(s), multiple detections in a single frame will all have the same timestamp".to_string()),
-            params: Some(vec![
-                "timestamp".to_string(),
-                "class_id".to_string(),
-                "detection_id".to_string(),
-                "norm_cx".to_string(),
-                "norm_cy".to_string(),
-                "norm_size".to_string(),
-                "confidence".to_string(),
-            ]),
-        },
-        MavEnumEntry {
             value: Some(31050),
             name: "CUSTOM_PATRON_CANCEL_LMT".to_string(),
             description: Some("Cancels LMT, tracking stays enabled".to_string()),
@@ -75,7 +61,7 @@ pub fn get_custom_entries() -> Vec<MavEnumEntry> {
             value: Some(31054),
             name: "CUSTOM_PATRON_SELECTION_MODE".to_string(),
             description: Some("Switches object selection mode, 1: SOT, 2: AI-Assisted".to_string()),
-            params:  Some(vec!["mode (1/2)".to_string()]),
+            params: Some(vec!["mode (1/2)".to_string()]),
         },
         MavEnumEntry {
             value: Some(31055),
