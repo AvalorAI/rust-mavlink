@@ -42,5 +42,11 @@ pub fn get_custom_entries() -> Vec<MavEnumEntry> {
                 "altitude".to_string(),
             ]),
         },
+        MavEnumEntry {
+            value: Some(405),
+            name: "MAV_CMD_ILLUMINATOR_ON_OFF_CUSTOM".to_string(),
+            description: Some("Actual illuminator mode command hacked in".to_string()),
+            params: Some(vec!["enable".to_string()]),
+        },
     ]
 }
